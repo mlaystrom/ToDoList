@@ -3,6 +3,7 @@ using ToDoList.Data;
 using ToDoList.Data.Entities;
 using ToDoList.Services.User;
 
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -12,7 +13,7 @@ builder.Services.AddDbContext<ToDoListDbContext>(options =>
     options.UseSqlServer(connectionString);
 });
 
-//builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IUserService, UserService>();
 
 //Enables using Identity Managers (Users, SignIn, Password)
 builder.Services.AddDefaultIdentity<UserEntity>()

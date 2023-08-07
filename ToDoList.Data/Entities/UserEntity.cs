@@ -8,5 +8,5 @@ public class UserEntity : IdentityUser<int>
     public string? LastName { get; set; }
     public string? Password { get; set; }
 
-    //IdentityUser provices inherited property for Username and Email 
+    //IdentityUser provides inherited property for Username and Email 
 }

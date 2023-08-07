@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using ToDoList.Data;
 using ToDoList.Data.Entities;
+using ToDoList.Services.User;
 
 var builder = WebApplication.CreateBuilder(args);
 

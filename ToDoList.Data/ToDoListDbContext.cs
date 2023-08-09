@@ -9,7 +9,7 @@ namespace ToDoList.Data;
 public class ToDoListDbContext : IdentityDbContext<UserEntity, IdentityRole<int>, int>
 {
     //constructor of the ToDoListDbContext class
-    public ToDoListDbContext(DbContextOptions<ToDoListDbContext>options)
+    public ToDoListDbContext(DbContextOptions<ToDoListDbContext> options)
         : base(options) { }
     public virtual DbSet<UserEntity> User { get; set; }
     public virtual DbSet<ToDoEntity> ToDo { get; set; }

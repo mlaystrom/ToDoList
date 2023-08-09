@@ -3,3 +3,43 @@
     ViewData["Title"] = "Register Account";
 }
 <h1>Sign Up</h1>
+<div asp-validation-summary="All" class="text-danger"></div>
+
+<div class="container">
+    <div class="border p-4 mt-5">
+<form asp-action="Register" method="post">
+<div class="row mt-3">
+  <div class="col">
+    <input type="text" class="form-control" asp-for="FirstName" placeholder="First Name">
+    <span asp-validation-for="FirstName" class="text-danger"></span>
+  </div>
+  <div class="col">
+   <input type="text" class="form-control" asp-for="LastName" placeholder="Last Name">
+    <span asp-validation-for="LastName" class="text-danger"></span>
+  </div>
+</div>
+<div class="row mt-3">
+  <div class="col">
+    <input type="text" class="form-control" asp-for="UserName" placeholder="Username">
+    <span asp-validation-for="UserName" class="text-danger"></span>
+  </div>
+  <div class="col">
+   <input type="password" class="form-control" asp-for="Password" placeholder="Password">
+    <span asp-validation-for="Password" class="text-danger"></span>
+  </div>
+</div>
+<div class="row mt-3 mb-3">
+  <div class="col">
+    <input type="text" class="form-control" asp-for="Email"placeholder="Email">
+    <span asp-validation-for="Email" class="text-danger"></span>
+  </div>
+</div>
+<div class="d-flex flex-column vstack gap-2 col-md-2 mx-auto">
+    <button type="submit" class="btn btn-outline-primary btn-md">SUBMIT</button>
+    <a asp-action="Login" asp-controller="Account" class="text-center">Log in</a>
+</div>
+
+
+</form>
+</div>
+</div>

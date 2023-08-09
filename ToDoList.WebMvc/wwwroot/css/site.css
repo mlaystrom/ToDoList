@@ -20,3 +20,22 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+body, .homeIndex {
+ background: #8da6c0;
+ color: rgb(223, 203, 166);
+
+}
+
+.homeIndex img{
+  content: url("../Assets/isabelvelasco-unsplash.jpg");
+
+}
+
+.container img{
+ position: relative;
+ justify-content: center;
+ align-items: center;
+ width: 400px;
+ border-radius: 15px;
+}

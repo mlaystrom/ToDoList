@@ -3,13 +3,9 @@
 @inject SignInManager<UserEntity> SignInManager
 
     <ul class ="navbar-nav">
-        @if (SignInManager .IsSignedIn(User))
+        @if (SignInManager.IsSignedIn(User))
         {
-            <li class="nav-item">
-                <a class="nav-link">
-                    Hello @User.Identity?.Name!
-                </a>
-            </li>
+           
             <li class="nav-item">
                 <a class="nav-link">
                     Hi @User.Identity?.Name!

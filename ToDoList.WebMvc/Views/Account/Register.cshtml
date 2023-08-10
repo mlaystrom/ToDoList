@@ -4,7 +4,10 @@
 }
 <h1>Sign Up</h1>
 <div asp-validation-summary="All" class="text-danger"></div>
-
+<div class="mt-3 mb-3">
+    <p>Have an account? Click: <a asp-action="Login" asp-controller="Account" class="text-center">Log in</a> </p>
+  
+</div>
 <div class="container">
     <div class="border p-4 mt-5">
 <form asp-action="Register" method="post">

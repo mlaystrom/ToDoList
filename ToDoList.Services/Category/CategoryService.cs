@@ -10,7 +10,7 @@ public class CategoryService : ICategoryService
 {
     private readonly ToDoListDbContext _context;
 
-    private readonly int _userId;
+    private readonly int _userId;//filtering by user
     public CategoryService(UserManager<UserEntity> userManager, SignInManager<UserEntity> signInManager,ToDoListDbContext context)
     {
         var user = signInManager.Context.User; //looking at who is signed in within the current context
@@ -23,18 +23,29 @@ public class CategoryService : ICategoryService
     public async Task<List<CategoryListItem>> GetAllCategoryAsync()
     {
         var category = await _context.Category
-        .Where(c => c.UserId == _userId)
+        .Where(c => c.UserId == _userId)//looking for category list of current user
         .Select(c => new CategoryListItem
         {
             Id= c.Id,
             Type = c.Type
         })
-        .ToListAsync();
+        .ToListAsync(); //converting into a c# list
         return category;
     }
 
-    Task<List<CategoryListItem>> ICategoryService.GetAllCategoryAsync()
+   public async Task<bool> CreateCategoryAsync(CategoryCreate model)
+   {
+    //making a Category from the model passed into the method
+    var entity = new CategoryEntity
     {
-        throw new NotImplementedException();
-    }
+    Type = model.Type,
+    UserId = _userId
+    };
+
+    _context.Category.Add(entity); //add category to the DbSet
+    var numberOfChanges = await _context.SaveChangesAsync(); //synching the Db with the DbContext, which will add the new Category to SQL Db
+    return numberOfChanges == 1;
+   }
+
+   
 }

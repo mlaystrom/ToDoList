@@ -1,0 +1,39 @@
+@model IEnumerable<CategoryListItem>
+
+@{
+    ViewData["Title"] = "Category Index";
+}
+
+<h1>Category Types</h1>
+<p>
+    <a asp-action="Create">Add A Type</a>
+</p>
+
+<div class="mt-5 p-3 border p-4 mt-5" >
+  <h2>Complete List of Current Categories</h2>  
+  <hr>
+  <table>
+    <thead>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Type)
+        </th>
+    </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @item.Type
+                </td>
+                <td class= "text-end">
+                    <a asp-action="Update" asp-route-id="@item.Id">Update</a>
+                    <span>|</span>
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+  </table>
+</div>

@@ -40,4 +40,7 @@ public class CategoryController : Controller
         await _service.CreateCategoryAsync(model);
         return RedirectToAction(nameof(Index));
     }
+
+
+  
 }

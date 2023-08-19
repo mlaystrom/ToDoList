@@ -47,5 +47,18 @@ public class CategoryService : ICategoryService
     return numberOfChanges == 1;
    }
 
+    public async Task<CategoryDetail> GetCategoryDetailAsync(int id)
+    {
+      var category = await _context.Category.FindAsync(id);
+
+      if (category is null)
+      return new CategoryDetail(); //an empty CategoryDetail object is returned
+      CategoryDetail model = new()
+      {
+        Id = category.Id,
+        Type = category.Type
+      };
+      return model;
+    }
    
 }

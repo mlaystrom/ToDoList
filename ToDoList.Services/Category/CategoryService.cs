@@ -60,5 +60,34 @@ public class CategoryService : ICategoryService
       };
       return model;
     }
-   
+
+    public async Task<bool> UpdateCategoryAsync(CategoryUpdate model)
+    {
+        var category = await _context.Category.FindAsync(model.Id);
+        if (category is null)
+        return false;
+
+        category.Type = model.Type;
+
+        return await _context.SaveChangesAsync() == 1;
+    }
+
+    public async Task<bool> DeleteCategoryAsync(int id)
+    {
+        var category = await _context.Category.FindAsync(id);
+        if (category is null)
+            return false;
+        //checking if the todo list is using the category wanting to delete
+        var usedCategory = await _context.ToDo.Where(t => t.CategoryId == id).ToListAsync();
+        //won't delete the category if being used by todo
+        if (usedCategory.Any())
+        {
+            return false;
+        }
+
+        _context.Category.Remove(category);
+        return await _context.SaveChangesAsync() == 1;
+    }
+
+
 }

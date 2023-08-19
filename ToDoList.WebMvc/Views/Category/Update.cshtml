@@ -1,0 +1,19 @@
+@model CategoryUpdate
+
+@{
+    ViewData["Title"] = "Update" + Model.Type;
+}
+
+<h1>Update: @Model.Type</h1>
+<hr>
+<form asp-action="Update" method="post" class="row g-3">
+    <input asp-for="Id" hidden disabled>
+    <div class = "col-md-6 form-floating mb-2">
+        <input asp-for="Type" class="form-control" placeholder="Type">
+        <label asp-for="Type" class="form-label"></label>
+    </div>
+    <div class="d-flex">
+        <input type="submit" value="Update" class="btn btn-outline-primary btn-lg">
+        <a asp-action="Index" class="btn btn-link">Return to List</a>
+    </div>
+</form>

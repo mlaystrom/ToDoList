@@ -41,6 +41,54 @@ public class CategoryController : Controller
         return RedirectToAction(nameof(Index));
     }
 
+    //GET for the Update method
+    [HttpGet]
+    public async Task<IActionResult> Update(int id)
+    {
+        CategoryDetail category = await _service.GetCategoryDetailAsync(id);
 
-  
+        CategoryUpdate model = new()
+        {
+            Id = category.Id,
+            Type = category.Type
+        };
+
+        return View(model);
+    }
+
+    //POST for Update
+    [HttpPost]
+    public async Task<IActionResult> Update(int id, CategoryUpdate model)
+    {
+        if (!ModelState.IsValid)
+            return View(model);
+
+        //passing the model to the service method
+        //returning the user to the Index view
+        if(await _service.UpdateCategoryAsync(model))
+            return RedirectToAction("Index", new {id = id});
+        
+        ModelState.AddModelError("Save Error", "Please Try Again. Unable to update the Category details.");
+        return View(model);
+    }
+
+    //GET for Delete
+    [HttpGet]
+    public async Task<IActionResult> Delete(int id)
+    {
+        CategoryDetail category = await _service.GetCategoryDetailAsync(id);
+        if (category is null)
+        return RedirectToAction(nameof(Index));
+
+        return View(category);
+    }
+
+    //POST for Delete
+    [HttpPost]
+    [ActionName(nameof(Delete))]
+    public async Task<IActionResult> ConfirmDelete(int id)
+    {
+        await _service.DeleteCategoryAsync(id);
+        return RedirectToAction(nameof(Index));
+    }
 }

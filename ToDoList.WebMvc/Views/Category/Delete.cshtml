@@ -1,0 +1,20 @@
+@model CategoryDetail
+
+@{ViewData["Title"] = Model.Type;
+} 
+
+<h1>Remove Category Type: @Model.Type</h1>
+<hr>
+
+<dl>
+    <dt class="col-sm-2 mt-5">
+        @Html.DisplayNameFor(model => model.Type)
+    </dt>
+    <dd class="col-sm-2 mt-2 ps-2">
+        @Html.DisplayFor(model => model.Type)
+    </dd>
+</dl>
+<form asp-action="Delete" class="col d-flex vstack gap-2 col-md-2">
+    <input type ="submit" value="Delete" class="btn btn-outline-danger btn-lg" />
+     <a asp-action="Index"style="text-align:center">Return to List</a>
+</form>

@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using ToDoList.Data;
 using ToDoList.Data.Entities;
 using ToDoList.Services.Category;
+using ToDoList.Services.ToDo;
 using ToDoList.Services.User;
 
 
@@ -16,6 +17,7 @@ builder.Services.AddDbContext<ToDoListDbContext>(options =>
 
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
+builder.Services.AddScoped<IToDoService, ToDoService>();
 
 //Enables using Identity Managers (Users, SignIn, Password)
 builder.Services.AddDefaultIdentity<UserEntity>()

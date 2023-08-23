@@ -14,6 +14,8 @@ public class ToDoListDbContext : IdentityDbContext<UserEntity, IdentityRole<int>
     public virtual DbSet<UserEntity> User { get; set; }
     public virtual DbSet<ToDoEntity> ToDo { get; set; }
     public virtual DbSet<CategoryEntity> Category { get; set; }
+
+
     
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

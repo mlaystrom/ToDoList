@@ -1,0 +1,44 @@
+@using Microsoft.AspNetCore.Identity
+@using ToDoList.Data.Entities
+@inject UserManager<UserEntity> UserManager
+
+@model CreateListItem
+@{
+    ViewData["Title"] = "Create ToDo Item";
+    var categoryList =  ViewData["Categories"] as List<SelectListItem>;
+}
+
+<h1>Add A ToDo Task</h1>
+<hr>
+<form asp-action="Create" method="post" class="row g-3">
+    <div class = "col-md-6 form-floating mb-2">
+        <label asp-for="CategoryId" class="form-label">Task Category:</label>
+        <select asp-for="CategoryId" class="form-control mt-2">
+            <option value="" >Click to Select...</option>
+            @foreach (var item in ViewData["Categories"] as List<SelectListItem>)
+                {
+                    <option value="@item.Value">@item.Text</option>
+                }
+         </select>
+    </div>
+     <div class = "col-md-6 form-floating mb-2">
+        <input asp-for="Description" class="form-control" placeholder="Description">
+        <span asp-validation-for="Description" class="text-danger"></span>
+        <label asp-for="Description" class="form-label"></label>
+     </div>
+      <div class = "col-md-6 form-floating mb-2">
+        <input asp-for="FinishByDate" class="form-control" placeholder="Date Complete By">
+        <span asp-validation-for="FinishByDate" class="text-danger"></span>
+        <label asp-for="FinishByDate" class="form-label"></label>
+     </div>
+    <div class="d-flex">
+        <input type="submit" value="Add" class="btn btn-outline-primary btn-lg">
+        <a asp-action="Index" class="btn btn-link">Return to List</a>
+    </div>
+</form>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

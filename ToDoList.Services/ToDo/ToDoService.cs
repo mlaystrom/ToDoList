@@ -9,10 +9,11 @@ namespace ToDoList.Services.ToDo;
 
 public class ToDoService : IToDoService
 {
-    private readonly ToDoListDbContext _context;
+    private ToDoListDbContext _context;
 
     //allows us to obtain ToDo by current user
     private int _userId;
+    private int _categoryId;
 
     //setting up service methods
     public ToDoService(UserManager<UserEntity> userManager, SignInManager<UserEntity> signInManager, ToDoListDbContext context)
@@ -26,20 +27,39 @@ public class ToDoService : IToDoService
         _context = context;
     }
 
+    public async Task<bool> CreateToDoItemAsync(CreateListItem model)
+    {
+        var entity = new ToDoEntity
+        {
+            UserId = _userId,
+            CategoryId = model.CategoryId,
+            Description = model.Description,
+            FinishByDate = model.FinishByDate
+        };
+        //now adding new entity to the ToDoList table
+        _context.ToDo.Add(entity);
+        var numberOfChanges = await _context.SaveChangesAsync();
+
+        return numberOfChanges == 1;
+    }
+
     public async Task<List<ToDoListItem>> GetAllToDoAsync()
     {
-        var activity = await _context.ToDo
+        //getting all todo items from ToDo Entity Db set
+        //including todo that are associated with User and Category
+        var activity = await _context.ToDo.Include(a => a.User).Include(a => a.Category)
         .Where(a => a.UserId == _userId)
         .Select(a => new ToDoListItem
         {
             Id = a.Id,
             UserId = a.UserId,
             CategoryId = a.CategoryId,
+            Category = a.Category.Type, //accessing the type property on the a.Category object
             Description = a.Description,
             FinishByDate = a.FinishByDate
         }
         )
-        .ToListAsync();
-        return activity;
+        .ToListAsync();// fetching the data from the Db and returns the results as a list (c#) of ToDoListItem objects
+        return activity; //the list of ToDoListItem objects is returned from the method
     }
 }

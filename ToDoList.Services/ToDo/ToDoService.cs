@@ -62,4 +62,54 @@ public class ToDoService : IToDoService
         .ToListAsync();// fetching the data from the Db and returns the results as a list (c#) of ToDoListItem objects
         return activity; //the list of ToDoListItem objects is returned from the method
     }
+
+    public async Task<ToDoDetail> GetDetailsByIdAsync(int id)
+    {
+        //first looking for the ToDo that matches the id from Db
+        var entity = await _context.ToDo.FindAsync(id);
+        //if entity is null, a new instance of ToDoDetail is returned (an empty representation of detailed ToDo item)
+        if (entity is null)
+        return new ToDoDetail();
+
+        ToDoDetail model = new()
+        {
+            Id = entity.Id,
+            UserId = entity.UserId,
+            CategoryId = entity.CategoryId,
+            Description = entity.Description,
+            FinishByDate = entity.FinishByDate
+        };
+        return model;
+    }
+
+    public async Task<bool> UpdateToDoAsync(ToDoUpdate model)
+    {
+        //declaring variable entity
+        //searching for an entity in the ToDo table of the Db
+        //the entity being searched for is an entity with the primary key value matching model.Id
+        var entity = await _context.ToDo.FindAsync(model.Id);
+
+        if(entity is null)
+        return false;
+
+        entity.Id = model.Id;
+        entity.CategoryId = model.CategoryId;
+        entity.Description = model.Description;
+        entity.FinishByDate = model.FinishByDate;
+
+        return await _context.SaveChangesAsync() == 1;
+    }
+
+    public async Task<bool> DeleteToDoAsync(int id)
+    {
+        var entity = await _context.ToDo.FindAsync(id);
+        if (entity is null)
+        return false;
+
+        //telling the Dbset to remove the found entity that was determined not null
+        //Save changes to Db and return a boolean that states one change was made
+        _context.ToDo.Remove(entity);
+        return await _context.SaveChangesAsync() == 1;
+    }
+
 }

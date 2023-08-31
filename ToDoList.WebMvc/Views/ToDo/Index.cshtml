@@ -9,7 +9,7 @@
     <a asp-action="Create">Add A Task</a>
 </p>
 <div class="mt-5 p-3 border p-4 mt-5" >
-  <h2>Task Managment: My Comprehensive ToDo List</h2>  
+  <h2>Task Managment: My ToDo List</h2>  
   <hr>
   
   @foreach (var ToDoListItem in Model)
@@ -18,6 +18,13 @@
         <h3>@ToDoListItem.Description</h3>
         <p>Category: @ToDoListItem.Category</p>
         <p>Date Finished: @ToDoListItem.FinishByDate</p>
+         <div class="text-center">
+            <a asp-action="Details" asp-route-id="@ToDoListItem.Id">Details</a>
+            <span>|</span>
+            <a asp-action="Update" asp-route-id="@ToDoListItem.Id">Update</a>
+            <span>|</span>
+            <a asp-action="Delete" asp-route-id="@ToDoListItem.Id">Delete</a>
+        </div>
         <hr>
     </div>
   }

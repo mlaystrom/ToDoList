@@ -4,26 +4,27 @@
     ViewData["Title"] = "ToDo Index";
 }
 
-<h1>ToDo List</h1>
-<p>
-    <a asp-action="Create">Add A Task</a>
+<h1 class="mb-3" style="text-align: center">ToDo List</h1>
+<p style="text-align: center">
+    <a asp-action="Create" class="button">Add A Task</a>
 </p>
-<div class="mt-5 p-3 border p-4 mt-5" >
-  <h2>Task Managment: My ToDo List</h2>  
+<div class="mt-5 p-3 border p-4 mt-5" style="text-align: center" >
+  <h2>Task Managment</h2>  
   <hr>
   
   @foreach (var ToDoListItem in Model)
   {
-    <div>
-        <h3>@ToDoListItem.Description</h3>
-        <p>Category: @ToDoListItem.Category</p>
-        <p>Date Finished: @ToDoListItem.FinishByDate</p>
-         <div class="text-center">
-            <a asp-action="Details" asp-route-id="@ToDoListItem.Id">Details</a>
+    <div style="text-align: center">
+        
+        <h3 class="mb-3" style="color: rgb(105, 100, 100)">Category: @ToDoListItem.Category</h3>
+        <p>@ToDoListItem.Description</p>
+        <p>Complete By: @ToDoListItem.FinishByDate</p>
+         <div class="text-center p-3">
+            <a asp-action="Details" class="button" asp-route-id="@ToDoListItem.Id">Details</a>
             <span>|</span>
-            <a asp-action="Update" asp-route-id="@ToDoListItem.Id">Update</a>
+            <a asp-action="Update" class="button" asp-route-id="@ToDoListItem.Id">Update</a>
             <span>|</span>
-            <a asp-action="Delete" asp-route-id="@ToDoListItem.Id">Delete</a>
+            <a asp-action="Delete" class="button" asp-route-id="@ToDoListItem.Id">Delete</a>
         </div>
         <hr>
     </div>

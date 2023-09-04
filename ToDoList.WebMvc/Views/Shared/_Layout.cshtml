@@ -7,6 +7,9 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/ToDoList.WebMvc.styles.css" asp-append-version="true" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500&family=Dancing+Script:wght@700&family=Poppins:ital,wght@1,300&family=Work+Sans&display=swap" rel="stylesheet">
 </head>
 <body>
     <header>
@@ -25,7 +28,10 @@
                         @if (User.Identity?.IsAuthenticated == true)
                         {
                         <li class="nav-item">
-                            
+                            <a class="nav-link" asp-action="Index" asp-controller="ToDo">List</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-action="Index" asp-controller="Category">Categories</a>
                         </li>
                         }
                        

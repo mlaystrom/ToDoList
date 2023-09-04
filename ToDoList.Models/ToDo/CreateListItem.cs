@@ -10,6 +10,6 @@ public class CreateListItem
     public int CategoryId { get; set; }
     public string Description { get; set; } = string.Empty;
 
-    [Display(Name = "Date Completed")]
+    [Display(Name = "Complete By:")]
     public DateTime FinishByDate { get; set; }
 }

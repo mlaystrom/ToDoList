@@ -39,6 +39,8 @@ public class UserService : IUserService
         };
 
         var createResult = await _userManager.CreateAsync(user, model.Password);
+        foreach (var e in createResult.Errors)
+        Console.WriteLine(e.Description);
             return createResult.Succeeded;
 
     }
